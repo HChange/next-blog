@@ -48,7 +48,7 @@ export interface ResponseData {
  */
 const index = ({
   data,
-}: InferGetServerSidePropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
   return (
     <div>
@@ -69,22 +69,7 @@ const index = ({
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const {
-//     params: { username },
-//   } = context;
-//   const res = await fetch(`https://api.github.com/users/${username}`);
-//   const data: ResponseData = await res.json();
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  console.log(context);
-  
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const {
     params: { username },
   } = context;
@@ -94,25 +79,40 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       data,
     },
-    // revalidate:60
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async (context) => {
-  console.log(context);
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   console.log(context);
   
-  // const {params:{username}} = context;
+//   const {
+//     params: { username },
+//   } = context;
+//   const res = await fetch(`https://api.github.com/users/${username}`);
+//   const data: ResponseData = await res.json();
+//   return {
+//     props: {
+//       data,
+//     },
+//     // revalidate:60
+//   };
+// };
+
+// export const getStaticPaths: GetStaticPaths = async (context) => {
+//   console.log(context);
   
-  return {
-    paths: [
-      {
-        params: {
-          username:'HChange',
-        },
-      },
+//   // const {params:{username}} = context;
+  
+//   return {
+//     paths: [
+//       {
+//         params: {
+//           username:'HChange',
+//         },
+//       },
       
-    ],
-    fallback: true,
-  };
-};
+//     ],
+//     fallback: true,
+//   };
+// };
 export default index;
