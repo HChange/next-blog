@@ -49,7 +49,24 @@ export interface ResponseData {
 const index = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter()
+  const router = useRouter();
+  /**
+   * 处理时差
+   */
+  const getLocateDate = (date:string)=>{
+    if(!date) return '-';
+    /* 当地时间 （Date）*/
+    const localTime =  new Date();
+    /* 获取本地时间与格林尼治时间的误差(ms) */
+    const localOffsetms = localTime.getTimezoneOffset()*60000;
+    /* 目标时间的毫秒数 */
+    const targetTimems = new Date(date).getTime();
+    /* 得到目标时间相对当前时间的毫秒 */
+    const currentTimems = targetTimems+localOffsetms;
+    /* 转化为展示字符串 */
+    const currentTimeString  = new Date(currentTimems).toLocaleString();
+    return currentTimeString;  
+  }
   return (
     <div>
       {data&&<ul>
@@ -57,7 +74,7 @@ const index = ({
           return (
             <li key={item}>
               <span>{item}:</span>
-              <em>{data[item]}</em>
+              <em>{item==="updated_at"||item==="created_at"?getLocateDate(data[item]):data[item]}</em>
             </li>
           );
         })}
