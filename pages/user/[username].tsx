@@ -42,6 +42,10 @@ export interface ResponseData {
   updated_at: string;
 }
 
+/**
+ * 
+ * @param index
+ */
 const index = ({
   data,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
