@@ -68,8 +68,8 @@ const index = ({
     
     // const currentTimeString  = new Date(currentTimems).toLocaleString();
     // return currentTimeString; 
-     
-    return new Date(date);
+
+    return new Date(date).toLocaleString();
   }
   return (
     <div>
