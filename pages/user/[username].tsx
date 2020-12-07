@@ -82,6 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+
 // export const getStaticProps: GetStaticProps = async (context) => {
 //   console.log(context);
   
